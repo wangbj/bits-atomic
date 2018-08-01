@@ -33,7 +33,7 @@ main = defaultMain tests
 testPattern :: Integral a => a
 testPattern = 0xdeadbeef
 
-type PolyTest = (AtomicBits a, Storable a, Integral a, Bounded a) => a -> Assertion
+type PolyTest = forall a. (AtomicBits a, Storable a, Integral a, Bounded a, Show a) => a -> Assertion
 
 testTypes :: PolyTest -> Assertion
 testTypes _test = do
@@ -48,7 +48,7 @@ testTypes _test = do
     _test (testPattern :: Word32)
     _test (testPattern :: Word64)
 
-test_compareAndSwap :: (AtomicBits a, Storable a, Integral a, Bounded a) => 
+test_compareAndSwap :: (AtomicBits a, Storable a, Integral a, Bounded a, Show a) =>
              a -> Assertion
 test_compareAndSwap i = alloca $ \p -> do
     poke p i
@@ -63,7 +63,7 @@ test_compareAndSwap i = alloca $ \p -> do
 test_compareAndSwap_all :: Assertion
 test_compareAndSwap_all = testTypes test_compareAndSwap
 
-test_compareAndSwapBool :: (AtomicBits a, Storable a, Integral a, Bounded a) => 
+test_compareAndSwapBool :: (AtomicBits a, Storable a, Integral a, Bounded a, Show a) =>
              a -> Assertion
 test_compareAndSwapBool i = alloca $ \p -> do
     poke p i
@@ -78,7 +78,7 @@ test_compareAndSwapBool i = alloca $ \p -> do
 test_compareAndSwapBool_all :: Assertion
 test_compareAndSwapBool_all = testTypes test_compareAndSwapBool
 
-test_fetchAndAdd :: (AtomicBits a, Storable a, Integral a, Bounded a) => 
+test_fetchAndAdd :: (AtomicBits a, Storable a, Integral a, Bounded a, Show a) =>
                  a -> Assertion
 test_fetchAndAdd i = alloca $ \p -> do
     poke p i
@@ -96,7 +96,7 @@ test_fetchAndAdd_all :: Assertion
 test_fetchAndAdd_all = testTypes test_fetchAndAdd
 
 
-test_fetchAndSub :: (AtomicBits a, Storable a, Integral a, Bounded a) => 
+test_fetchAndSub :: (AtomicBits a, Storable a, Integral a, Bounded a, Show a) =>
                  a -> Assertion
 test_fetchAndSub i = alloca $ \p -> do
     poke p i
@@ -113,7 +113,7 @@ test_fetchAndSub_all :: Assertion
 test_fetchAndSub_all = testTypes test_fetchAndSub
 
 
-test_fetchAndXor :: (AtomicBits a, Storable a, Integral a, Bounded a) => 
+test_fetchAndXor :: (AtomicBits a, Storable a, Integral a, Bounded a, Show a) =>
                  a -> Assertion
 test_fetchAndXor i = alloca $ \p -> do
     poke p i
@@ -125,7 +125,7 @@ test_fetchAndXor_all :: Assertion
 test_fetchAndXor_all = testTypes test_fetchAndXor
 
 
-test_subAndFetch :: (AtomicBits a, Storable a, Integral a, Bounded a) => 
+test_subAndFetch :: (AtomicBits a, Storable a, Integral a, Bounded a, Show a) =>
                  a -> Assertion
 test_subAndFetch i = alloca $ \p -> do
     poke p i
@@ -138,7 +138,7 @@ test_subAndFetch i = alloca $ \p -> do
 test_subAndFetch_all :: Assertion
 test_subAndFetch_all = testTypes test_subAndFetch
 
-test_lockTestRelease :: (AtomicBits a, Storable a, Integral a, Bounded a) => 
+test_lockTestRelease :: (AtomicBits a, Storable a, Integral a, Bounded a, Show a) =>
                  a -> Assertion
 test_lockTestRelease i = alloca $ \p -> do
     poke p i
