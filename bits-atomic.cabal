@@ -41,8 +41,8 @@ Description:
 Category:           Data, Concurrency, Foreign
 Stability:          experimental
 Build-Type:         Simple
-Cabal-Version:      >= 2.0
-tested-with:         GHC == 8.4.3 && ==8.2.2
+Cabal-Version:      >= 1.18
+tested-with:         GHC == 8.4.3 && ==8.2.2 && ==8.0.2 && ==7.10.3
 Extra-Source-Files: cbits/atomic-bitops-gcc.c cbits/atomic-bitops-gcc.h
 Source-Repository head
     type: mercurial
